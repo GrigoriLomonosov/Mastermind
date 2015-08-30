@@ -21,6 +21,12 @@ public class Model {
         return attempt;
     }
     
+    //Field with the result of the checkCode method for the latest attempt
+    private final int[] currentCorrectness = {0,0};
+    public int[] getCurrentCorrectness(){
+        return currentCorrectness;
+    }
+    
     public boolean makeCode(int[]code){
         //TO DO
         return true;
@@ -51,7 +57,10 @@ public class Model {
     }
     
     public boolean checkCodeCorrectness(){
-        return true;
+        if(code != null){
+            return currentCorrectness[0] == code.length;
+        }
+        return false;
     }
     
     

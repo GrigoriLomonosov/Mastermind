@@ -679,4 +679,61 @@ public class ModelTest {
         assertArrayEquals(new int[]{4,0}, model.checkCode());**/
     }
     
+    
+    /**
+     * Test of makeCode method, of class Model.
+     */
+    @Test
+    public void testCheckCodeCorrectness() {
+        System.out.println("checkCodeCorrectness");
+        model.makeCode(new int[]{0,1,2,3});
+        model.makeAttempt(new int[]{0,1,2,3});
+        model.checkCode();
+        assertTrue(model.checkCodeCorrectness());
+        model.makeCode(new int[]{0,1,2,3});
+        model.makeAttempt(new int[]{0,0,2,3});
+        model.checkCode();
+        assertFalse(model.checkCodeCorrectness());
+        model.makeCode(new int[]{0,1,2,3});
+        model.makeAttempt(new int[]{3,2,1,0});
+        model.checkCode();
+        assertFalse(model.checkCodeCorrectness());
+        model.makeCode(new int[]{0,1,2,3});
+        model.makeAttempt(new int[]{0,0,0,0});
+        model.checkCode();
+        assertFalse(model.checkCodeCorrectness());
+        model.makeCode(new int[]{0,1,2,3,4});
+        model.makeAttempt(new int[]{0,1,2,4,3});
+        model.checkCode();
+        assertFalse(model.checkCodeCorrectness());
+        model.makeCode(new int[]{0,1,2,3,4,5});
+        model.makeAttempt(new int[]{0,1,2,5,5});
+        model.checkCode();
+        assertFalse(model.checkCodeCorrectness());
+        model.makeCode(new int[]{0,1,2,3,5});
+        model.makeAttempt(new int[]{0,1,2,3,5});
+        model.checkCode();
+        assertTrue(model.checkCodeCorrectness());
+        model.makeCode(new int[]{0,1,2,3,5,6});
+        model.makeAttempt(new int[]{6,5,4,3,2,1,0});
+        model.checkCode();
+        assertFalse(model.checkCodeCorrectness());
+        model.makeCode(new int[]{1,1,2,3});
+        model.makeAttempt(new int[]{1,1,2,3});
+        model.checkCode();
+        assertTrue(model.checkCodeCorrectness());
+        model.makeCode(new int[]{0,1,2,3});
+        model.makeAttempt(new int[]{0,1,1,3});
+        model.checkCode();
+        assertFalse(model.checkCodeCorrectness());
+        model.makeCode(new int[]{0,3,2,1});
+        model.makeAttempt(new int[]{0,3,2,0});
+        model.checkCode();
+        assertFalse(model.checkCodeCorrectness());
+        model.makeCode(new int[]{0,0,0,1,2,3});
+        model.makeAttempt(new int[]{0,0,0,1,2,3});
+        model.checkCode();
+        assertTrue(model.checkCodeCorrectness());
+        
+    }
 }

@@ -1,10 +1,8 @@
 package mastermind;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 /**
  *
@@ -12,20 +10,17 @@ import java.util.Set;
  */
 public class Model {
     
+    private static final int MIN_POSS = 4;
+    private static final int MAX_POSS = 9;
+    
     private int[] possibilities;
     public int[] getPossibilities(){
         return possibilities;
     }
     
     private int[] code;
-    public int[] getCode(){
-        return code;
-    }
     
     private int[] attempt;
-    public int [] getAttempt(){
-        return attempt;
-    }
     
     //Field with the result of the checkCode method for the latest attempt
     private final int[] currentCorrectness = {0,0};
@@ -75,12 +70,15 @@ public class Model {
     }
     
     public boolean makePossibilities(int k){
-        int[] poss = new int[k];
-        for(int i=0; i<poss.length; i++){
-            poss[i] = i;
+        if(k>=MIN_POSS && k<=MAX_POSS){
+            int[] poss = new int[k];
+            for(int i=0; i<poss.length; i++){
+                poss[i] = i;
+            }
+            possibilities = poss;
+            return true;
         }
-        possibilities = poss;
-        return true;
+        return false;
     }
     
     /**
@@ -88,15 +86,14 @@ public class Model {
      * The second element shows the number of elements with the correct color but not on the correct position.
      */
     public int[] checkCode(){
+        int[] result = {0,0};
         if(attempt != null && attempt.length == code.length){
-            int first = 0;
-            int second = 0;
             List<Integer> codeList = new ArrayList<>();
             List<Integer> attemptList = new ArrayList<>();
             //check for correct place and number
             for(int i=0; i<code.length; i++){
                 if(code[i]==attempt[i]){
-                    first++;
+                    result[0]++;
                 }
                 else{
                     codeList.add(code[i]);
@@ -107,32 +104,18 @@ public class Model {
             //they cannot all be awarded a key peg unless they correspond to the same number of duplicate colours in the hidden code
             for (Integer attemptList1 : attemptList) {
                 if (codeList.contains(attemptList1)) {
-                    second++;
+                    result[1]++;
                     codeList.remove(attemptList1);
                 }
             }
-            return new int[]{first, second}; 
         }
-        return new int[]{-1,-1};
-    }
-    
-    private Set<Integer> deleteDuplicates(int[] a){
-        Set<Integer> result = new HashSet<>();
-        for(int i=0; i< a.length; i++){
-            result.add(a[i]);
-        }
-        //int[] array = result.stream().toArray(int[]::new);
-        //int[] temp = result.toArray(new int[result.size()]);
         return result;
     }
     
     public boolean checkCodeCorrectness(){
         if(code != null){
-            return currentCorrectness[0] == code.length;
+            return checkCode()[0] == code.length;
         }
         return false;
-    }
-    
-    
-    
+    }   
 }

@@ -26,10 +26,22 @@ public class Model implements Observable{
     
     private int numberOfSteps;
     
+    private boolean playerWins;
+    public boolean getPlayerWins(){
+        return playerWins;
+    }
+    
+    private boolean computerWins;
+    public boolean getComputerWins(){
+        return computerWins;
+    }
+    
     public void newGame(int k){
         makePossibilities(k);
         makeQuestion();
         numberOfSteps = 0;
+        playerWins = false;
+        computerWins = false;
         fireInvalidationEvent();
     }
     
@@ -132,24 +144,16 @@ public class Model implements Observable{
     }   
     
     //Returns 0 if the game is not over yet, 1 if the computer wins and 2 if the player wins.
-    public int step(){
+    public void step(){
         checkCode();
         numberOfSteps++;
-        if(numberOfSteps<possibilities.length*3){
-            if(checkCodeCorrectness()){
-                return 2;
-            }
-            else{
-                return 0;
-            }
+        if(numberOfSteps==possibilities.length*3 && !checkCodeCorrectness()){
+            computerWins = true;
         }
-        //else is only reached on the final step
-        else{
-            if(!checkCodeCorrectness()){
-                return 1;
-            }
-            return 2;
+        if(numberOfSteps<possibilities.length*3 && checkCodeCorrectness()){
+            playerWins = true;
         }
+        fireInvalidationEvent();
     }
     
     //Code concerning the listeners

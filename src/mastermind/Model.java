@@ -3,12 +3,14 @@ package mastermind;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 
 /**
  *
  * @author Jeroen De Meyer
  */
-public class Model {
+public class Model implements Observable{
     
     private static final int MIN_POSS = 4;
     private static final int MAX_POSS = 9;
@@ -22,8 +24,17 @@ public class Model {
     
     private int[] attempt;
     
+    private int numberOfSteps;
+    
+    public void newGame(int k){
+        makePossibilities(k);
+        makeQuestion();
+        numberOfSteps = 0;
+        fireInvalidationEvent();
+    }
+    
     //Field with the result of the checkCode method for the latest attempt
-    private final int[] currentCorrectness = {0,0};
+    private int[] currentCorrectness;
     public int[] getCurrentCorrectness(){
         return currentCorrectness;
     }
@@ -109,13 +120,52 @@ public class Model {
                 }
             }
         }
+        currentCorrectness = result;
         return result;
     }
     
     public boolean checkCodeCorrectness(){
         if(code != null){
-            return checkCode()[0] == code.length;
+            return currentCorrectness[0] == code.length;
         }
         return false;
     }   
+    
+    //Returns 0 if the game is not over yet, 1 if the computer wins and 2 if the player wins.
+    public int step(){
+        checkCode();
+        numberOfSteps++;
+        if(numberOfSteps<possibilities.length*3){
+            if(checkCodeCorrectness()){
+                return 2;
+            }
+            else{
+                return 0;
+            }
+        }
+        //else is only reached on the final step
+        else{
+            if(!checkCodeCorrectness()){
+                return 1;
+            }
+            return 2;
+        }
+    }
+    
+    //Code concerning the listeners
+    private final List<InvalidationListener> listenerList = new ArrayList<>();
+    @Override
+    public void addListener(InvalidationListener listener){
+        listenerList.add(listener);
+    }
+    @Override
+    public void removeListener(InvalidationListener listener){
+        listenerList.add(listener);
+    }
+
+    public void fireInvalidationEvent(){
+        for(InvalidationListener listener: listenerList){
+            listener.invalidated(this);
+        }
+    }
 }

@@ -12,8 +12,25 @@ import javafx.beans.Observable;
  */
 public class Model implements Observable{
     
-    private static final int MIN_POSS = 4;
-    private static final int MAX_POSS = 9;
+    private static final int MIN_POSS = 6;
+    private static final int MAX_POSS = 11;
+    
+    private int codeLength = 4;
+    public int getCodeLength(){
+        return codeLength;
+    }
+    //The codeLength depends on MIN_POSS en MAX_POSS. The min and max are 2 less then the current MIN_POSS and MAX_POSS
+    //Returns true if a valid k is given, false otherwise.
+    public boolean setCodeLength(int k){
+        if(k>=MIN_POSS-2 && k<=MAX_POSS-2){
+            codeLength = k;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
     
     private int[] possibilities;
     public int[] getPossibilities(){
@@ -52,7 +69,7 @@ public class Model implements Observable{
     }
     
     public boolean makeCode(int[]c){
-        if(possibilities != null && possibilities.length==c.length){
+        if(possibilities != null && codeLength==c.length){
             for(int i=0; i<c.length; i++){
                 if(c[i]<0 || c[i]>=possibilities.length){
                     return false;
@@ -81,7 +98,7 @@ public class Model implements Observable{
     public boolean makeQuestion(){
         if(possibilities != null){
             Random rd = new Random();
-            int[] temp = new int[possibilities.length];
+            int[] temp = new int[codeLength];
             for(int i=0; i<temp.length; i++){
                 temp[i] = rd.nextInt(temp.length);
             }

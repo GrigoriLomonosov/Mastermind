@@ -213,6 +213,17 @@ public class ModelTest {
         assertTrue(model.makeCode(code22));
         assertTrue(model.makeCode(code23));
     }
+    
+    @Test
+    public void testNewGame() {
+        System.out.println("newGame");
+        
+        assertTrue(model.newGame(6, 4)); //true
+        assertFalse(model.newGame(4, 6)); //false
+        assertFalse(model.newGame(5, 4)); //false
+        assertFalse(model.newGame(6, 9));
+        assertTrue(model.newGame(9,6));
+    }
 
     /**
      * Test of makeAttempt method, of class Model.

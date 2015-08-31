@@ -59,8 +59,12 @@ public class PlayingFieldCompanion implements InvalidationListener{
             System.out.println("game started");
             int numberOfColors = (int)colors.getSelectionModel().getSelectedItem();
             int length = (int)codeLength.getSelectionModel().getSelectedItem();
-            System.out.println(model);
-            model.newGame(numberOfColors,length);
+            boolean b = model.newGame(numberOfColors,length);
+            if(!b){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setContentText("Choose correct configuration");
+                alert.showAndWait();
+            }
         }
     }
     

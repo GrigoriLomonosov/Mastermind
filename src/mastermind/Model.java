@@ -15,16 +15,16 @@ public class Model implements Observable{
     private static final int MIN_POSS = 6;
     private static final int MAX_POSS = 11;
     
-    private int codeLength = 4;
+    private int codeLength = MIN_POSS-2;
     public int getCodeLength(){
         return codeLength;
     }
     //The codeLength depends on MIN_POSS en MAX_POSS.
     //Returns true if a valid k is given, false otherwise.
     public boolean setCodeLength(int k){
-        if(k>=MIN_POSS-2 && k<=MAX_POSS-2){
+        if(k>=MIN_POSS-2 && k<=MAX_POSS-2 && possibilities!=null){
             codeLength = k;
-            return true;
+            return possibilities.length > codeLength;
         }
         else{
             return false;
@@ -57,14 +57,23 @@ public class Model implements Observable{
         return computerWins;
     }
     
-    public void newGame(int poss, int len){
-        makePossibilities(poss);
-        setCodeLength(len);
-        makeQuestion();
-        step = 0;
-        playerWins = false;
-        computerWins = false;
-        fireInvalidationEvent();
+    public boolean newGame(int poss, int len){
+        possibilities = null;
+        code = null;
+        codeLength = MIN_POSS-2;
+        boolean correctPoss = makePossibilities(poss);
+        boolean correctLen = setCodeLength(len);
+        boolean correctQuestion = makeQuestion();
+        if(correctPoss && correctLen && correctQuestion){
+            step = 0;
+            playerWins = false;
+            computerWins = false;
+            fireInvalidationEvent();
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     
     //Field with the result of the checkCode method for the latest attempt

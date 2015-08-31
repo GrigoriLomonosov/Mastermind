@@ -40,8 +40,6 @@ public class Model implements Observable{
     
     private int[] code;
     
-    //private int[] attempt;
-    
     private int step;
     public int getStep(){
         return step;
@@ -58,12 +56,10 @@ public class Model implements Observable{
     }
     
     public boolean newGame(int poss, int len){
-        possibilities = null;
-        code = null;
-        codeLength = MIN_POSS-2;
         boolean correctPoss = makePossibilities(poss);
         boolean correctLen = setCodeLength(len);
         boolean correctQuestion = makeQuestion();
+        correctness = new int[getMaxSteps()][2];        
         if(correctPoss && correctLen && correctQuestion){
             step = 0;
             playerWins = false;
@@ -72,14 +68,18 @@ public class Model implements Observable{
             return true;
         }
         else{
+            possibilities = null;
+            code = null;
+            codeLength = MIN_POSS-2;
+            correctness = new int[getMaxSteps()][2];
             return false;
         }
     }
     
-    //Field with the result of the checkCode method for the latest attempt
-    private int[] currentCorrectness;
-    public int[] getCurrentCorrectness(){
-        return currentCorrectness;
+    //Field with the results of the checkCode method for the attempts
+    private int[][] correctness = new int[getMaxSteps()][2];
+    public int[][] getcorrectness(){
+        return correctness;
     }
     
     public boolean makeCode(int[]c){
@@ -164,13 +164,13 @@ public class Model implements Observable{
                 }
             }
         }
-        currentCorrectness = result;
+        correctness[step] = result;
         return result;
     }
     
     public boolean checkCodeCorrectness(){
         if(code != null){
-            return currentCorrectness[0] == code.length;
+            return correctness[step][0] == code.length;
         }
         return false;
     }   
@@ -179,13 +179,17 @@ public class Model implements Observable{
     public void step(){
         checkCode();
         step++;
-        if(step==codeLength*3 && !checkCodeCorrectness()){
+        if(step==getMaxSteps() && !checkCodeCorrectness()){
             computerWins = true;
         }
-        if(step<codeLength*3 && checkCodeCorrectness()){
+        if(step<getMaxSteps() && checkCodeCorrectness()){
             playerWins = true;
         }
         fireInvalidationEvent();
+    }
+    
+    public int getMaxSteps(){
+        return codeLength*3;
     }
     
     //Code concerning the listeners

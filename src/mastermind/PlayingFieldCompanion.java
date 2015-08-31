@@ -11,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.VBox;
+import mastermind.controllers.Row;
 
 /**
  *
@@ -18,6 +20,8 @@ import javafx.scene.control.ChoiceBox;
  */
 public class PlayingFieldCompanion implements InvalidationListener{
     
+    @FXML
+    public VBox rowContainer;
     @FXML
     public Button newBtn;
     @FXML
@@ -49,14 +53,12 @@ public class PlayingFieldCompanion implements InvalidationListener{
         System.out.println("start new Game");
         if(colors.getSelectionModel().selectedIndexProperty().getValue()==-1 ||
             codeLength.getSelectionModel().selectedIndexProperty().getValue()==-1  ){
-            System.out.println("game not started");
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Board not configured");
             alert.setContentText("Please choose the number of colors and the length of the code");
             alert.showAndWait();
         }
         else{
-            System.out.println("game started");
             int numberOfColors = (int)colors.getSelectionModel().getSelectedItem();
             int length = (int)codeLength.getSelectionModel().getSelectedItem();
             boolean b = model.newGame(numberOfColors,length);
@@ -64,6 +66,11 @@ public class PlayingFieldCompanion implements InvalidationListener{
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setContentText("Choose correct configuration");
                 alert.showAndWait();
+            }
+            else{
+                System.out.println("add: " + rowContainer);
+                rowContainer.getChildren().clear();
+                rowContainer.getChildren().add(new Row());
             }
         }
     }

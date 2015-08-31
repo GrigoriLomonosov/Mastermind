@@ -9,7 +9,7 @@
 <?import mastermind.controllers.*?>
 <?import mastermind.*?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <fx:define>
         <Model fx:id="model"/>
     </fx:define>
@@ -23,7 +23,7 @@
       </ToolBar>
     </top>
     <center>
-       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+       <VBox fx:id="rowContainer" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
           <children>
              <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="1" />
              <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="1" />

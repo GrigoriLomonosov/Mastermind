@@ -61,16 +61,19 @@ public class PlayingFieldCompanion implements InvalidationListener{
         else{
             int numberOfColors = (int)colors.getSelectionModel().getSelectedItem();
             int length = (int)codeLength.getSelectionModel().getSelectedItem();
-            boolean b = model.newGame(numberOfColors,length);
-            if(!b){
+            boolean b = true;
+            if(model.newGame(numberOfColors,length)){
+                System.out.println("add: " + rowContainer);
+                rowContainer.getChildren().clear();
+                for(int i=0; i<model.getMaxSteps(); i++){
+                    //hier zou je een type row kunnen creëren en die dan x keer toevoegen...
+                    rowContainer.getChildren().add(new Row());
+                }
+            }
+            else{
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setContentText("Choose correct configuration");
                 alert.showAndWait();
-            }
-            else{
-                System.out.println("add: " + rowContainer);
-                rowContainer.getChildren().clear();
-                rowContainer.getChildren().add(new Row());
             }
         }
     }

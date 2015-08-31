@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 public class PlayingField extends BorderPane{
 
     private final PlayingFieldCompanion comp;
-    
+    /**
     public Model model;
     public Model getModel(){
         return model;
@@ -19,7 +19,7 @@ public class PlayingField extends BorderPane{
     public void setModel(Model m){
         model = m;
         comp.setModel(model);
-    }
+    }**/
     
     public PlayingField(){
         try{

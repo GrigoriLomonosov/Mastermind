@@ -57,8 +57,9 @@ public class Model implements Observable{
         return computerWins;
     }
     
-    public void newGame(int k){
-        makePossibilities(k);
+    public void newGame(int poss, int len){
+        makePossibilities(poss);
+        setCodeLength(len);
         makeQuestion();
         step = 0;
         playerWins = false;

@@ -5,7 +5,10 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
@@ -22,7 +25,7 @@ public class PlayingFieldCompanion implements InvalidationListener{
     @FXML
     public ChoiceBox codeLength;
 
-    private Model model;
+    public Model model;
     public void setModel(Model m){
         if(model != m){
             if(model != null){
@@ -42,9 +45,28 @@ public class PlayingFieldCompanion implements InvalidationListener{
                 createOptions(4,9)));
     }
     
+    public void startNewGame(ActionEvent e){
+        System.out.println("start new Game");
+        if(colors.getSelectionModel().selectedIndexProperty().getValue()==-1 ||
+            codeLength.getSelectionModel().selectedIndexProperty().getValue()==-1  ){
+            System.out.println("game not started");
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Board not configured");
+            alert.setContentText("Please choose the number of colors and the length of the code");
+            alert.showAndWait();
+        }
+        else{
+            System.out.println("game started");
+            int numberOfColors = (int)colors.getSelectionModel().getSelectedItem();
+            int length = (int)codeLength.getSelectionModel().getSelectedItem();
+            System.out.println(model);
+            model.newGame(numberOfColors,length);
+        }
+    }
+    
     @Override
     public void invalidated(Observable o){
-        
+        System.out.println(model);
     }
     
     public List<Integer> createOptions(int begin, int end){

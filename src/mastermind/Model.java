@@ -19,7 +19,7 @@ public class Model implements Observable{
     public int getCodeLength(){
         return codeLength;
     }
-    //The codeLength depends on MIN_POSS en MAX_POSS. The min and max are 2 less then the current MIN_POSS and MAX_POSS
+    //The codeLength depends on MIN_POSS en MAX_POSS.
     //Returns true if a valid k is given, false otherwise.
     public boolean setCodeLength(int k){
         if(k>=MIN_POSS-2 && k<=MAX_POSS-2){
@@ -31,6 +31,7 @@ public class Model implements Observable{
         }
     }
     
+    private int[][] attempts;
     
     private int[] possibilities;
     public int[] getPossibilities(){
@@ -39,9 +40,12 @@ public class Model implements Observable{
     
     private int[] code;
     
-    private int[] attempt;
+    //private int[] attempt;
     
-    private int numberOfSteps;
+    private int step;
+    public int getStep(){
+        return step;
+    }
     
     private boolean playerWins;
     public boolean getPlayerWins(){
@@ -56,7 +60,7 @@ public class Model implements Observable{
     public void newGame(int k){
         makePossibilities(k);
         makeQuestion();
-        numberOfSteps = 0;
+        step = 0;
         playerWins = false;
         computerWins = false;
         fireInvalidationEvent();
@@ -75,8 +79,9 @@ public class Model implements Observable{
                     return false;
                 }
             }
+            step = 0;
             code = c;
-            attempt = null;
+            attempts = new int[codeLength][];
             return true;
         }
         return false;
@@ -89,7 +94,7 @@ public class Model implements Observable{
                     return false;
                 }
             }
-            attempt = a;
+            attempts[step] = a;
             return true;
         }
         return false;
@@ -103,7 +108,7 @@ public class Model implements Observable{
                 temp[i] = rd.nextInt(temp.length);
             }
             code = temp;
-            attempt = null;
+            attempts = new int[codeLength][];
             return true;
         }
         return false;
@@ -127,17 +132,17 @@ public class Model implements Observable{
      */
     public int[] checkCode(){
         int[] result = {0,0};
-        if(attempt != null && attempt.length == code.length){
+        if(attempts[step] != null && attempts[step].length == code.length){
             List<Integer> codeList = new ArrayList<>();
             List<Integer> attemptList = new ArrayList<>();
             //check for correct place and number
             for(int i=0; i<code.length; i++){
-                if(code[i]==attempt[i]){
+                if(code[i]==attempts[step][i]){
                     result[0]++;
                 }
                 else{
                     codeList.add(code[i]);
-                    attemptList.add(attempt[i]);
+                    attemptList.add(attempts[step][i]);
                 }
             }
             //check for correct number on incorrect place. If there are duplicate numbers in the guess, 
@@ -163,11 +168,11 @@ public class Model implements Observable{
     //Returns 0 if the game is not over yet, 1 if the computer wins and 2 if the player wins.
     public void step(){
         checkCode();
-        numberOfSteps++;
-        if(numberOfSteps==possibilities.length*3 && !checkCodeCorrectness()){
+        step++;
+        if(step==codeLength*3 && !checkCodeCorrectness()){
             computerWins = true;
         }
-        if(numberOfSteps<possibilities.length*3 && checkCodeCorrectness()){
+        if(step<codeLength*3 && checkCodeCorrectness()){
             playerWins = true;
         }
         fireInvalidationEvent();

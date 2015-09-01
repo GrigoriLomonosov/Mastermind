@@ -192,6 +192,13 @@ public class Model implements Observable{
         return codeLength*3;
     }
     
+    public int getNumberPossibilities(){
+        if(possibilities!=null){
+            return possibilities.length;
+        }
+        return -1;
+    }
+    
     //Code concerning the listeners
     private final List<InvalidationListener> listenerList = new ArrayList<>();
     @Override

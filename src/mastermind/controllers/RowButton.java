@@ -15,4 +15,8 @@ public class RowButton extends Button{
     public void setPlace(int place) {
         this.place = place;
     }
+    
+    public RowButton(int place){
+        this.place = place;
+    }
 }

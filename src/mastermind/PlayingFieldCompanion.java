@@ -12,7 +12,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
-import mastermind.controllers.Row;
+import mastermind.controllers.PlayingFieldRow;
 
 /**
  *
@@ -67,7 +67,7 @@ public class PlayingFieldCompanion implements InvalidationListener{
                 rowContainer.getChildren().clear();
                 for(int i=0; i<model.getMaxSteps(); i++){
                     //hier zou je een type row kunnen creëren en die dan x keer toevoegen...
-                    rowContainer.getChildren().add(new Row());
+                    rowContainer.getChildren().add(new PlayingFieldRow(i,length,model).create());
                 }
             }
             else{

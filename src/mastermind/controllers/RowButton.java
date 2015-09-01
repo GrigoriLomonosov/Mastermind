@@ -12,26 +12,32 @@ import mastermind.Model;
  */
 public class RowButton extends Button implements InvalidationListener{
     
-    private final int place;
-    
     private final Model model;
+    public Model getModel(){
+        return model;
+    }
     
     private final ObservableIntegerArray tempAttempt;
+    public ObservableIntegerArray getTempAttempt(){
+        return tempAttempt;
+    }
     
     private final int rowNumber;
+    public int getRowNumber(){
+        return rowNumber;
+    }
     
-    public RowButton(Model model, ObservableIntegerArray tempAttempt, int place, int rowNumber){
+    public RowButton(Model model, ObservableIntegerArray tempAttempt, int rowNumber){
         this.model = model;
         this.tempAttempt = tempAttempt;
-        this.place = place;
         this.rowNumber = rowNumber;
+        setDisable(rowNumber!=0);
     }
     
     @Override
     public void invalidated(Observable o){
-        setDisable(model.getStep()!=rowNumber ||
-                                model.getComputerWins() || 
-                                model.getPlayerWins());
-        setText(Integer.toString(tempAttempt.get(place)));
+        setDisable(model.getStep()!=getRowNumber() ||
+                    model.getComputerWins() || 
+                    model.getPlayerWins());
     }
 }

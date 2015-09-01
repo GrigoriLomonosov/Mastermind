@@ -49,24 +49,20 @@ public class PlayingFieldRow {
         hb.setPrefWidth(200);
         //Adding the buttons
         for(int i=0; i<numberOfButtons; i++){
-            RowButton btn = new RowButton(model, tempAttempt,i, rowNumber);
-            btn.setOnAction(new RowButtonHandler(model, tempAttempt,i));
-            btn.setText(Integer.toString(tempAttempt.get(i)));
-            buttons[i] = btn;
+            RowButton btn = new PlayButton(model, tempAttempt,i, rowNumber);
+            //buttons[i] = btn;
             model.addListener(btn);
             tempAttempt.addListener(btn);
             hb.getChildren().add(btn);
         }
         //Adding the checkButton
-        Button checkBtn = new Button();
-        checkBtn.setOnAction(new CheckButtonHandler(model, tempAttempt));
-        //checkBtn.setDisable(true);
-        InvalidationListener listener = (Observable o) -> {
+        RowButton checkBtn = new CheckButton(model, tempAttempt, rowNumber);
+        /**InvalidationListener listener = (Observable o) -> {
             checkBtn.setDisable(model.getStep()!=rowNumber ||
                                 model.getComputerWins() || 
                                 model.getPlayerWins());
-        };
-        model.addListener(listener);
+        };**/
+        model.addListener(checkBtn);
         hb.getChildren().add(checkBtn);
         //Adding the circles
         for(int i=0; i<numberOfButtons; i++){

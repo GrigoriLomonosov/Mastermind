@@ -1,9 +1,7 @@
 package mastermind;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -65,6 +63,9 @@ public class Model implements Observable{
         boolean correctPoss = makePossibilities(poss);
         boolean correctLen = setCodeLength(len);
         boolean correctQuestion = makeQuestion();
+        System.out.println(correctPoss);
+        System.out.println(correctPoss);
+        System.out.println(correctPoss);
         correctness = new int[getMaxSteps()][2];        
         if(correctPoss && correctLen && correctQuestion){
             step = 0;
@@ -230,6 +231,13 @@ public class Model implements Observable{
             }
         }
         return result;
+    }
+    
+    public Color getCircleColor(int row, int place){
+        if(row<getMaxSteps() && place<getCodeLength()){
+            return getResultConfiguration(row)[place];
+        }
+        return Color.TRANSPARENT;
     }
     
     //Code concerning the listeners

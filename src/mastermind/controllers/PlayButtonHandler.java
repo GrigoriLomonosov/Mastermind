@@ -24,9 +24,6 @@ public class PlayButtonHandler implements EventHandler<ActionEvent>{
     }
     @Override
     public void handle(ActionEvent event){
-        //(tempAttempt.get(rowBtnNumber)+1)%model.getNumberPossibilities()
         tempAttempt.set(rowBtnNumber, (tempAttempt.get(rowBtnNumber)+1)%model.getNumberPossibilities());            
-        //System.out.println(tempAttempt.get(rowBtnNumber));
     }
-
 }

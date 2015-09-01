@@ -61,12 +61,12 @@ public class PlayingFieldCompanion implements InvalidationListener{
         else{
             int numberOfColors = (int)colors.getSelectionModel().getSelectedItem();
             int length = (int)codeLength.getSelectionModel().getSelectedItem();
-            boolean b = true;
+            System.out.println("length: " + length);
             if(model.newGame(numberOfColors,length)){
                 System.out.println("add: " + rowContainer);
                 rowContainer.getChildren().clear();
                 for(int i=0; i<model.getMaxSteps(); i++){
-                    rowContainer.getChildren().add(new PlayingFieldRow(i,length,model).create());
+                    rowContainer.getChildren().add(new PlayingFieldRow(i, model).create());
                 }
             }
             else{
@@ -88,6 +88,5 @@ public class PlayingFieldCompanion implements InvalidationListener{
             result.add(i);
         }
         return result;
-    }
-    
+    }    
 }

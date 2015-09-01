@@ -9,12 +9,12 @@
 <?import mastermind.controllers.*?>
 <?import mastermind.*?>
 
-<fx:root fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <fx:define>
         <Model fx:id="model"/>
     </fx:define>
     <top>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ToolBar prefHeight="50.0" prefWidth="500" BorderPane.alignment="CENTER">
         <items>
           <Button onAction="#startNewGame" mnemonicParsing="false" text="Button" />
             <ChoiceBox fx:id="colors" prefWidth="150.0" />
@@ -23,18 +23,17 @@
       </ToolBar>
     </top>
     <center>
-       <VBox fx:id="rowContainer" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-          <children>
-             <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="1" />
-             <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="1" />
-             <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="2" />
-             <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="3" />
-             <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="4" />
-             <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="5" />
-             <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="6" />
-             <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="7" />
-             <Row model="$model" prefHeight="40.0" prefWidth="200.0" step="8" />
-          </children>
-       </VBox>
+        <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" BorderPane.alignment="CENTER">    
+        <content>
+            <StackPane  prefHeight="550" prefWidth="600.0">
+            <children>
+                <VBox alignment="CENTER" fx:id="rowContainer">
+                   <children>
+                   </children>
+                </VBox>
+            </children>
+            </StackPane>
+        </content>
+        </ScrollPane>
     </center>
 </fx:root>

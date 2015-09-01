@@ -14,7 +14,6 @@ import mastermind.Model;
  * @author Jeroen De Meyer
  */
 public class PlayButton extends RowButton{
-
         
     private final ColorSelector selector = new ColorSelector(); 
     
@@ -29,14 +28,12 @@ public class PlayButton extends RowButton{
             "-fx-min-height: 30px; " +
             "-fx-max-width: 30px; " +
             "-fx-max-height: 30px;");
-        setBackgroundColor();
-        //setText(Integer.toString(tempAttempt.get(place)));     
+        setBackgroundColor();   
     }
     
     @Override
     public void invalidated(Observable o){
         super.invalidated(o);
-        //setText(Integer.toString(getTempAttempt().get(place)));
         setBackgroundColor();
     }
     

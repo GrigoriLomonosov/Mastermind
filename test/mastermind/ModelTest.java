@@ -757,12 +757,5 @@ public class ModelTest {
         model.makeAttempt(new int[]{0,0,0,0,0});
         model.checkCode();
         assertArrayEquals(new Color[]{Color.BLACK,Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT}, model.getResultConfiguration(0));
-    
-    
-    
-    
-    
-    
-    
     }
 }

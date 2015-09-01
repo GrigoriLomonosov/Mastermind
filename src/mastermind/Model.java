@@ -1,10 +1,13 @@
 package mastermind;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -31,7 +34,7 @@ public class Model implements Observable{
         }
     }
     
-    private int[][] attempts;
+    public int[][] attempts;
     
     private int[] possibilities;
     public int[] getPossibilities(){
@@ -39,6 +42,9 @@ public class Model implements Observable{
     }
     
     private int[] code;
+    public int[] getCode(){
+        return code;
+    }
     
     private int step;
     public int getStep(){
@@ -78,7 +84,7 @@ public class Model implements Observable{
     
     //Field with the results of the checkCode method for the attempts
     private int[][] correctness = new int[getMaxSteps()][2];
-    public int[][] getcorrectness(){
+    public int[][] getCorrectness(){
         return correctness;
     }
     
@@ -91,7 +97,7 @@ public class Model implements Observable{
             }
             step = 0;
             code = c;
-            attempts = new int[codeLength][];
+            attempts = new int[getMaxSteps()][];
             return true;
         }
         return false;
@@ -118,7 +124,7 @@ public class Model implements Observable{
                 temp[i] = rd.nextInt(temp.length);
             }
             code = temp;
-            attempts = new int[codeLength][];
+            attempts = new int[getMaxSteps()][];
             return true;
         }
         return false;
@@ -177,15 +183,15 @@ public class Model implements Observable{
     
     //Returns 0 if the game is not over yet, 1 if the computer wins and 2 if the player wins.
     public void step(){
-        checkCode();
-        step++;
-        if(step==getMaxSteps() && !checkCodeCorrectness()){
+        checkCode();      
+        if(step==getMaxSteps()-1 && !checkCodeCorrectness()){
             computerWins = true;
         }
-        if(step<getMaxSteps() && checkCodeCorrectness()){
+        if(checkCodeCorrectness()){
             playerWins = true;
         }
         fireInvalidationEvent();
+        step++;
     }
     
     public int getMaxSteps(){
@@ -197,6 +203,29 @@ public class Model implements Observable{
             return possibilities.length;
         }
         return -1;
+    }
+    
+    public int[] getLatestAttempt(){
+        return attempts[step-1];
+    }
+    
+    //Returns an array with the length of the code. The array contains the success colors for each place in the code.
+    public Color[] getResultConfiguration(){
+        Color[] result = new Color[codeLength];
+        for(int i=0; i<correctness[step][0]; i++){
+            if(i<correctness[step][0]){
+                result[i] = Color.BLACK;
+            }
+            else{
+                if(i<correctness[step][0]+correctness[step][1]){
+                    result[i] = Color.WHITE;
+                }
+                else{
+                    result[i] = Color.TRANSPARENT;
+                }
+            }
+        }
+        return result;
     }
     
     //Code concerning the listeners

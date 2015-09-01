@@ -9,7 +9,7 @@ import mastermind.Model;
  *
  * @author Jeroen De Meyer
  */
-public class RowButtonHandler implements EventHandler<ActionEvent>{
+public class PlayButtonHandler implements EventHandler<ActionEvent>{
     
     private final int rowBtnNumber;
     
@@ -17,7 +17,7 @@ public class RowButtonHandler implements EventHandler<ActionEvent>{
     
     private final Model model;
         
-    public RowButtonHandler(Model model, ObservableIntegerArray tempAttempt, int rowBtnNumber){
+    public PlayButtonHandler(Model model, ObservableIntegerArray tempAttempt, int rowBtnNumber){
         this.model = model;
         this.tempAttempt = tempAttempt;
         this.rowBtnNumber = rowBtnNumber;

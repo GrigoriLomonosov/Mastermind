@@ -7,6 +7,7 @@ import javafx.collections.ObservableIntegerArray;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -20,9 +21,6 @@ import view.CustomCircle;
 public class PlayingFieldRow {
 
     private final int rowNumber;
-    public int getRowNumber(){
-        return rowNumber;
-    }
     
     private final int numberOfButtons;
     
@@ -57,11 +55,6 @@ public class PlayingFieldRow {
         }
         //Adding the checkButton
         RowButton checkBtn = new CheckButton(model, tempAttempt, rowNumber);
-        /**InvalidationListener listener = (Observable o) -> {
-            checkBtn.setDisable(model.getStep()!=rowNumber ||
-                                model.getComputerWins() || 
-                                model.getPlayerWins());
-        };**/
         model.addListener(checkBtn);
         hb.getChildren().add(checkBtn);
         //Adding the circles

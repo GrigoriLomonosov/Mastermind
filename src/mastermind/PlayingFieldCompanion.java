@@ -66,7 +66,6 @@ public class PlayingFieldCompanion implements InvalidationListener{
                 System.out.println("add: " + rowContainer);
                 rowContainer.getChildren().clear();
                 for(int i=0; i<model.getMaxSteps(); i++){
-                    //hier zou je een type row kunnen creëren en die dan x keer toevoegen...
                     rowContainer.getChildren().add(new PlayingFieldRow(i,length,model).create());
                 }
             }

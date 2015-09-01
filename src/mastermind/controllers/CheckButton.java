@@ -2,6 +2,7 @@ package mastermind.controllers;
 
 import javafx.beans.Observable;
 import javafx.collections.ObservableIntegerArray;
+import mastermind.ColorSelector;
 import mastermind.Model;
 
 /**

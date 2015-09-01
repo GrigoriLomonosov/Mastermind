@@ -28,7 +28,6 @@ public class ColorSelector {
     }
     
     public Color getColor(int i){
-        System.out.println("ColorSelector: " + colors.get(i));
         return colors.get(i);
     }
 }

@@ -24,10 +24,15 @@ public class CustomCircle extends Circle implements InvalidationListener{
         this.circleNumber = circleNumber;
         this.model = model;
         this.rowNumber = rowNumber;
+        setFill(Color.TRANSPARENT);
+        setRadius(10);
     }
     
     @Override
     public void invalidated(Observable o){
+        if(rowNumber<model.getStep()){
+            setStroke(Color.BLACK);            
+        }
         setFill(model.getResultConfiguration(rowNumber)[circleNumber]);
     }
 }

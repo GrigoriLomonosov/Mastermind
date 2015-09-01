@@ -1,13 +1,9 @@
 package mastermind.controllers;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableIntegerArray;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -60,45 +56,15 @@ public class PlayingFieldRow {
         //Adding the circles
         for(int i=0; i<numberOfButtons; i++){
             CustomCircle cc = new CustomCircle(i, model, rowNumber);
-            cc.setFill(Color.TRANSPARENT);
-            cc.setStroke(Color.BLACK);
-            cc.setRadius(10);
-            circles[i] = cc;
+            //circles[i] = cc;
             model.addListener(cc);
             hb.getChildren().add(cc);
         }
         
         return hb;
+    } 
+    
+    public void setRowStyle(HBox hb){
+        
     }
-   /** 
-    public class RowButtonHandler implements EventHandler<ActionEvent>{
-        
-        private final int rowBtnNumber;
-        
-        public RowButtonHandler(int rowBtnNumber){
-            this.rowBtnNumber = rowBtnNumber;
-        }
-        @Override
-        public void handle(ActionEvent event){
-            //(tempAttempt.get(rowBtnNumber)+1)%model.getNumberPossibilities()
-            tempAttempt.set(rowBtnNumber, (tempAttempt.get(rowBtnNumber)+1)%model.getNumberPossibilities());            
-            //System.out.println(tempAttempt.get(rowBtnNumber));
-        }
-    }**/
-    /**
-    public class CheckButtonHandler implements EventHandler<ActionEvent>{
-        
-        @Override
-        public void handle(ActionEvent event){
-            System.out.println("gecheckt");
-            model.makeAttempt(tempAttempt.toArray(new int[numberOfButtons]));
-            model.step();
-            System.out.println(model.getCode()[0]+" "+model.getCode()[1]+" "+model.getCode()[2]+" "+model.getCode()[3]+" ");
-            System.out.println(model.getLatestAttempt()[0]+" "+model.getLatestAttempt()[1]+" "+model.getLatestAttempt()[2]+" "+model.getLatestAttempt()[3]);
-            System.out.println("computerWins: " + model.getComputerWins());
-            System.out.println("playerWins: " + model.getPlayerWins());
-        }
-    }**/
-    
-    
 }

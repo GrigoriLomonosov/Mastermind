@@ -1,13 +1,9 @@
 package mastermind.controllers;
 
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableIntegerArray;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import mastermind.Model;
 import view.CustomCircle;
 

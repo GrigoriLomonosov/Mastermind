@@ -29,6 +29,7 @@ public class PlayingFieldCompanion implements InvalidationListener{
     @FXML
     public ChoiceBox codeLength;
 
+    //Kan dit ook niet eenvoudiger? Moet dit een invalidationlistener zijn, playingField?
     public Model model;
     public void setModel(Model m){
         if(model != m){

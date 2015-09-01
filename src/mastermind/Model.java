@@ -221,10 +221,10 @@ public class Model implements Observable{
             }
             else{
                 if(i<correctness[guess][0]+correctness[guess][1]){
-                    result[i] = Color.GREEN;
+                    result[i] = Color.WHITE;
                 }
                 else{
-                    result[i] = Color.RED;
+                    result[i] = Color.TRANSPARENT;
                 }
             }
         }

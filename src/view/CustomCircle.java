@@ -24,7 +24,6 @@ public class CustomCircle extends Circle implements InvalidationListener{
         this.circleNumber = circleNumber;
         this.model = model;
         this.rowNumber = rowNumber;
-        model.addListener(this);
     }
     
     @Override

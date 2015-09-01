@@ -1,10 +1,11 @@
 package mastermind;
 
+import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.BLACK;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 
 /**
  *
@@ -722,5 +723,46 @@ public class ModelTest {
         model.makeAttempt(new int[]{6,5,4,3,2,1,0});
         model.checkCode();
         assertFalse(model.checkCodeCorrectness());
+    }
+    
+    @Test
+    public void testGetResultConfiguration() {
+        System.out.println("resultConfiguration");
+        model.makePossibilities(7);
+        model.setCodeLength(5);
+        model.makeCode(new int[]{0,1,2,3,2});
+        model.makeAttempt(new int[]{0,1,2,3,2});
+        model.checkCode();
+        assertArrayEquals(new Color[]{Color.BLACK,Color.BLACK,Color.BLACK,Color.BLACK,Color.BLACK}, model.getResultConfiguration(0));
+        model.makeAttempt(new int[]{0,1,2,4,3});
+        model.checkCode();
+        assertArrayEquals(new Color[]{Color.BLACK,Color.BLACK,Color.BLACK,Color.WHITE,Color.TRANSPARENT}, model.getResultConfiguration(0));
+        model.makeAttempt(new int[]{0,1,2,3,3});
+        model.checkCode();
+        assertArrayEquals(new Color[]{Color.BLACK,Color.BLACK,Color.BLACK,Color.BLACK,Color.TRANSPARENT}, model.getResultConfiguration(0));
+        model.makeAttempt(new int[]{0,0,0,0,0});
+        model.checkCode();
+        assertArrayEquals(new Color[]{Color.BLACK,Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT}, model.getResultConfiguration(0));
+        
+        model.makeCode(new int[]{0,1,2,4,4});
+        model.makeAttempt(new int[]{0,1,2,3,2});
+        model.checkCode();
+        assertArrayEquals(new Color[]{Color.BLACK,Color.BLACK,Color.BLACK,Color.TRANSPARENT,Color.TRANSPARENT}, model.getResultConfiguration(0));
+        model.makeAttempt(new int[]{0,1,2,4,4});
+        model.checkCode();
+        assertArrayEquals(new Color[]{Color.BLACK,Color.BLACK,Color.BLACK,Color.BLACK,Color.BLACK}, model.getResultConfiguration(0));
+        model.makeAttempt(new int[]{0,1,3,2,3});
+        model.checkCode();
+        assertArrayEquals(new Color[]{Color.BLACK,Color.BLACK,Color.WHITE,Color.TRANSPARENT,Color.TRANSPARENT}, model.getResultConfiguration(0));
+        model.makeAttempt(new int[]{0,0,0,0,0});
+        model.checkCode();
+        assertArrayEquals(new Color[]{Color.BLACK,Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT}, model.getResultConfiguration(0));
+    
+    
+    
+    
+    
+    
+    
     }
 }

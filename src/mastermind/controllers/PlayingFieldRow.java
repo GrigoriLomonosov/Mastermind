@@ -65,9 +65,10 @@ public class PlayingFieldRow {
         
         for(int i=0; i<numberOfButtons; i++){
             CustomCircle cc = new CustomCircle(i, model, rowNumber);
-            System.out.println(cc);
+            cc.setFill(Color.TRANSPARENT);
             cc.setStroke(Color.BLACK);
             cc.setRadius(10);
+            model.addListener(cc);
             hb.getChildren().add(cc);
         }
         return hb;
@@ -83,7 +84,7 @@ public class PlayingFieldRow {
         @Override
         public void handle(ActionEvent event){
             tempAttempt[rowBtnNumber] = (tempAttempt[rowBtnNumber]+1)%model.getNumberPossibilities();
-            System.out.println(model.getStep());
+            
         }
     }
     

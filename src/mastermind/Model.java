@@ -209,19 +209,22 @@ public class Model implements Observable{
         return attempts[step-1];
     }
     
-    //Returns an array with the length of the code. The array contains the success colors for each place in the code.
-    public Color[] getResultConfiguration(){
+    /**
+     * @return a array consisting of the colors that represent the correctness of the guess.
+     * @param guess the step of which the correctness should be returned.
+     */
+    public Color[] getResultConfiguration(int guess){
         Color[] result = new Color[codeLength];
-        for(int i=0; i<correctness[step][0]; i++){
-            if(i<correctness[step][0]){
+        for(int i=0; i<codeLength; i++){
+            if(i<correctness[guess][0]){
                 result[i] = Color.BLACK;
             }
             else{
-                if(i<correctness[step][0]+correctness[step][1]){
-                    result[i] = Color.WHITE;
+                if(i<correctness[guess][0]+correctness[guess][1]){
+                    result[i] = Color.GREEN;
                 }
                 else{
-                    result[i] = Color.TRANSPARENT;
+                    result[i] = Color.RED;
                 }
             }
         }

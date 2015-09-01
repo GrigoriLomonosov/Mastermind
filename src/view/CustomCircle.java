@@ -18,14 +18,17 @@ public class CustomCircle extends Circle implements InvalidationListener{
     
     private final Model model;
     
-    public CustomCircle(int circleNumber, Model model){
+    private final int rowNumber;
+    
+    public CustomCircle(int circleNumber, Model model, int rowNumber){
         this.circleNumber = circleNumber;
         this.model = model;
+        this.rowNumber = rowNumber;
         model.addListener(this);
     }
     
     @Override
     public void invalidated(Observable o){
-        setFill(model.getResultConfiguration()[circleNumber]);
+        setFill(model.getResultConfiguration(rowNumber)[circleNumber]);
     }
 }

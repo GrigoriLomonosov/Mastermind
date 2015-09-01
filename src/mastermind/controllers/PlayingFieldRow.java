@@ -64,9 +64,8 @@ public class PlayingFieldRow {
         hb.getChildren().add(checkBtn);
         
         for(int i=0; i<numberOfButtons; i++){
-            CustomCircle cc = new CustomCircle(i, model);
+            CustomCircle cc = new CustomCircle(i, model, rowNumber);
             System.out.println(cc);
-            cc.setFill(Color.TRANSPARENT);
             cc.setStroke(Color.BLACK);
             cc.setRadius(10);
             hb.getChildren().add(cc);

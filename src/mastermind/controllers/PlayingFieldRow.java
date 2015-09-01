@@ -41,14 +41,6 @@ public class PlayingFieldRow {
         buttons = new Button[numberOfButtons];
         circles = new Circle[numberOfButtons];
         tempAttempt = FXCollections.observableIntegerArray(new int[numberOfButtons]);
-        tempAttempt.addListener(new InvalidationListener(){
-            @Override
-            public void invalidated(Observable o){
-                for(int i=0; i<buttons.length; i++){
-                    buttons[i].setText(Integer.toString(tempAttempt.get(i)));
-                }
-            }
-        });
     }
     
     public HBox create(){
@@ -57,22 +49,17 @@ public class PlayingFieldRow {
         hb.setPrefWidth(200);
         //Adding the buttons
         for(int i=0; i<numberOfButtons; i++){
-            RowButton btn = new RowButton(i);
-            btn.setOnAction(new RowButtonHandler(i));
-            //btn.setDisable(true);
-            InvalidationListener listener = (Observable o) -> {
-                System.out.println("step: " + model.getStep());
-                btn.setDisable(model.getStep()!=rowNumber ||
-                                model.getComputerWins() || 
-                                model.getPlayerWins());
-            };
+            RowButton btn = new RowButton(model, tempAttempt,i, rowNumber);
+            btn.setOnAction(new RowButtonHandler(model, tempAttempt,i));
+            btn.setText(Integer.toString(tempAttempt.get(i)));
             buttons[i] = btn;
-            model.addListener(listener);
+            model.addListener(btn);
+            tempAttempt.addListener(btn);
             hb.getChildren().add(btn);
         }
         //Adding the checkButton
         Button checkBtn = new Button();
-        checkBtn.setOnAction(new CheckButtonHandler());
+        checkBtn.setOnAction(new CheckButtonHandler(model, tempAttempt));
         //checkBtn.setDisable(true);
         InvalidationListener listener = (Observable o) -> {
             checkBtn.setDisable(model.getStep()!=rowNumber ||
@@ -94,7 +81,7 @@ public class PlayingFieldRow {
         
         return hb;
     }
-    
+   /** 
     public class RowButtonHandler implements EventHandler<ActionEvent>{
         
         private final int rowBtnNumber;
@@ -108,8 +95,8 @@ public class PlayingFieldRow {
             tempAttempt.set(rowBtnNumber, (tempAttempt.get(rowBtnNumber)+1)%model.getNumberPossibilities());            
             //System.out.println(tempAttempt.get(rowBtnNumber));
         }
-    }
-    
+    }**/
+    /**
     public class CheckButtonHandler implements EventHandler<ActionEvent>{
         
         @Override
@@ -122,7 +109,7 @@ public class PlayingFieldRow {
             System.out.println("computerWins: " + model.getComputerWins());
             System.out.println("playerWins: " + model.getPlayerWins());
         }
-    }
+    }**/
     
     
 }

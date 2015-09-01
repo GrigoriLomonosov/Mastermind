@@ -190,8 +190,9 @@ public class Model implements Observable{
         if(checkCodeCorrectness()){
             playerWins = true;
         }
-        fireInvalidationEvent();
         step++;
+        fireInvalidationEvent();
+        
     }
     
     public int getMaxSteps(){

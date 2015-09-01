@@ -80,7 +80,7 @@ public class PlayingFieldCompanion implements InvalidationListener{
     
     @Override
     public void invalidated(Observable o){
-        System.out.println(model);
+        System.out.println(model + "test van playingfieldComp");
     }
     
     public List<Integer> createOptions(int begin, int end){

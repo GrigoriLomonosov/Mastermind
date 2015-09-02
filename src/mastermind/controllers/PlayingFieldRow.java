@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableIntegerArray;
 import javafx.scene.layout.HBox;
 import mastermind.Model;
-import view.CustomCircle;
+import mastermind.view.CustomCircle;
 
 /**
  *

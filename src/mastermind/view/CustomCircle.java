@@ -1,5 +1,6 @@
-package view;
+package mastermind.view;
 
+import view.*;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.paint.Color;

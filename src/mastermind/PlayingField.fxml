@@ -41,7 +41,6 @@
    <bottom>
       <HBox fx:id="solutionContainer" alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-
          </children>
       </HBox>
    </bottom>

@@ -25,5 +25,4 @@ public class CheckButtonHandler implements EventHandler<ActionEvent>{
             model.makeAttempt(tempAttempt.toArray(new int[model.getCodeLength()]));
             model.step();
     }
-
 }

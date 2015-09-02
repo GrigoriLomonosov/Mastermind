@@ -63,9 +63,6 @@ public class Model implements Observable{
         boolean correctPoss = makePossibilities(poss);
         boolean correctLen = setCodeLength(len);
         boolean correctQuestion = makeQuestion();
-        System.out.println(correctPoss);
-        System.out.println(correctPoss);
-        System.out.println(correctPoss);
         correctness = new int[getMaxSteps()][2];        
         if(correctPoss && correctLen && correctQuestion){
             step = 0;

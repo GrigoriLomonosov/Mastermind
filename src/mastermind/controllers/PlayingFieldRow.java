@@ -2,7 +2,6 @@ package mastermind.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableIntegerArray;
-import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import mastermind.Model;
 import view.CustomCircle;

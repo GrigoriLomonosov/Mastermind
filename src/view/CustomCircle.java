@@ -1,7 +1,5 @@
 package view;
 
-import java.util.HashMap;
-import java.util.Map;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.paint.Color;

@@ -23,5 +23,4 @@ public class CheckButton extends RowButton{
     public void invalidated(Observable o){
         super.invalidated(o);
     }
-
 }

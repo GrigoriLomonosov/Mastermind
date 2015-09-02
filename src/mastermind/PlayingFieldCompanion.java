@@ -70,10 +70,6 @@ public class PlayingFieldCompanion implements InvalidationListener{
     
     @Override
     public void invalidated(Observable o){
-        /**
-        for(int i=0;i<model.getCodeLength();i++){
-            System.out.print(model.getCode()[i] + " ");
-        }**/
         if(model.getPlayerWins()){                  
             getVictoryAlert(resources.getString("playerWinsTitle"),
                             new MessageFormat(

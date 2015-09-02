@@ -3,6 +3,7 @@ package mastermind;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -19,7 +20,7 @@ public class Mastermind extends Application {
         scene.getStylesheets().add("resources/generalStyle.css");
         
         stage.setTitle("Mastermind");
-        //stage.getIcons().add(new Image("/resources/icon.png"));
+        stage.getIcons().add(new Image("/resources/icon.jpg"));
         stage.setScene(scene);
         stage.show();
     }
@@ -29,6 +30,5 @@ public class Mastermind extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }
-    
+    }  
 }

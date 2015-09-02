@@ -22,6 +22,7 @@ public class PlayButtonHandler implements EventHandler<ActionEvent>{
         this.tempAttempt = tempAttempt;
         this.rowBtnNumber = rowBtnNumber;
     }
+    
     @Override
     public void handle(ActionEvent event){
         tempAttempt.set(rowBtnNumber, (tempAttempt.get(rowBtnNumber)+1)%model.getNumberPossibilities());            

@@ -1,7 +1,9 @@
 package mastermind;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -20,6 +22,7 @@ import mastermind.controllers.PlayingFieldRow;
  */
 public class PlayingFieldCompanion implements InvalidationListener{
     
+    public ResourceBundle resources;
     @FXML
     public VBox rowContainer;
     @FXML
@@ -28,66 +31,73 @@ public class PlayingFieldCompanion implements InvalidationListener{
     public ChoiceBox colors;
     @FXML
     public ChoiceBox codeLength;
-
-    //Kan dit ook niet eenvoudiger? Moet dit een invalidationlistener zijn, playingField?
+    @FXML
     public Model model;
-    public void setModel(Model m){
-        if(model != m){
-            if(model != null){
-                model.removeListener(this);
-            }
-            model = m;
-            if(model!=null){
-                model.addListener(this);
-            }
-        }
-    }
     
     public void initialize(){
         colors.setItems(FXCollections.observableArrayList(
                 createOptions(6,11)));
         codeLength.setItems(FXCollections.observableArrayList(
                 createOptions(4,9)));
+        model.addListener(this);
     }
     
     public void startNewGame(ActionEvent e){
-        System.out.println("start new Game");
         if(colors.getSelectionModel().selectedIndexProperty().getValue()==-1 ||
             codeLength.getSelectionModel().selectedIndexProperty().getValue()==-1  ){
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Board not configured");
-            alert.setContentText("Please choose the number of colors and the length of the code");
-            alert.showAndWait();
+            getIncorrectConfigurationAlert();
         }
         else{
             int numberOfColors = (int)colors.getSelectionModel().getSelectedItem();
             int length = (int)codeLength.getSelectionModel().getSelectedItem();
-            System.out.println("length: " + length);
             if(model.newGame(numberOfColors,length)){
-                System.out.println("add: " + rowContainer);
                 rowContainer.getChildren().clear();
                 for(int i=0; i<model.getMaxSteps(); i++){
                     rowContainer.getChildren().add(new PlayingFieldRow(i, model).create());
                 }
             }
             else{
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setContentText("Choose correct configuration");
-                alert.showAndWait();
+                getIncorrectConfigurationAlert();
             }
         }
     }
     
     @Override
     public void invalidated(Observable o){
-        System.out.println(model + "test van playingfieldComp");
+        /**
+        for(int i=0;i<model.getCodeLength();i++){
+            System.out.print(model.getCode()[i] + " ");
+        }**/
+        if(model.getPlayerWins()){                  
+            getVictoryAlert(resources.getString("playerWinsTitle"),
+                            new MessageFormat(
+                                            resources.getString("playerWinsText")).format(
+                                                new Integer[]{model.getStep()}));
+        }
+        if(model.getComputerWins()){
+            getVictoryAlert(resources.getString("computerWinsTitle"), resources.getString("computerWinsText"));
+        }
     }
     
-    public List<Integer> createOptions(int begin, int end){
+    private List<Integer> createOptions(int begin, int end){
         List<Integer> result = new ArrayList<>();
         for(int i=begin; i<=end; i++){
             result.add(i);
         }
         return result;
-    }    
+    }   
+    
+    private void getIncorrectConfigurationAlert(){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(resources.getString("incorrectConfigTitle"));
+        alert.setContentText(resources.getString("incorrectConfigText"));
+        alert.showAndWait();
+    }
+    
+    private void getVictoryAlert(String title, String text){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(text);
+        alert.showAndWait();
+    }
 }

@@ -13,8 +13,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mastermind.controllers.PlayingFieldRow;
+import view.SolutionCircle;
 
 /**
  *
@@ -25,6 +28,8 @@ public class PlayingFieldCompanion implements InvalidationListener{
     public ResourceBundle resources;
     @FXML
     public VBox rowContainer;
+    @FXML
+    public HBox solutionContainer;
     @FXML
     public Button newBtn;
     @FXML
@@ -43,6 +48,7 @@ public class PlayingFieldCompanion implements InvalidationListener{
     }
     
     public void startNewGame(ActionEvent e){
+        solutionContainer.getChildren().clear();
         if(colors.getSelectionModel().selectedIndexProperty().getValue()==-1 ||
             codeLength.getSelectionModel().selectedIndexProperty().getValue()==-1  ){
             getIncorrectConfigurationAlert();
@@ -73,9 +79,11 @@ public class PlayingFieldCompanion implements InvalidationListener{
                             new MessageFormat(
                                             resources.getString("playerWinsText")).format(
                                                 new Integer[]{model.getStep()}));
+            showSolution();
         }
         if(model.getComputerWins()){
             getVictoryAlert(resources.getString("computerWinsTitle"), resources.getString("computerWinsText"));
+            showSolution();
         }
     }
     
@@ -99,5 +107,13 @@ public class PlayingFieldCompanion implements InvalidationListener{
         alert.setTitle(title);
         alert.setContentText(text);
         alert.showAndWait();
+    }
+    
+    private void showSolution(){
+        solutionContainer.getChildren().clear();
+        solutionContainer.getChildren().add(new Label(resources.getString("solutionLabel")));
+        for(int i=0; i<model.getCodeLength(); i++){
+            solutionContainer.getChildren().add(new SolutionCircle(model.getCode()[i]));
+        }
     }
 }

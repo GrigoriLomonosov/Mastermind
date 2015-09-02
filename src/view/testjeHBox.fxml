@@ -6,19 +6,34 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import mastermind.*?>
 
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <content>
-      <StackPane alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0">
-         <children>
-            <VBox alignment="CENTER" prefHeight="50.0" prefWidth="50.0">
-               <children>
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
-               </children>
-            </VBox>
-         </children>
-      </StackPane>
-   </content>
-</ScrollPane>
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <fx:define>
+        <Model fx:id="model"/>
+    </fx:define>
+    <top>
+      <ToolBar prefHeight="50.0" prefWidth="500" BorderPane.alignment="CENTER">
+        <items>
+          <Button onAction="#startNewGame" mnemonicParsing="false" text="Button" />
+            <ChoiceBox fx:id="colors" prefWidth="150.0" />
+            <ChoiceBox fx:id="codeLength" prefWidth="150.0" />
+        </items>
+      </ToolBar>
+    </top>
+    <center>
+        <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" BorderPane.alignment="CENTER">    
+        <content>
+            <StackPane  prefHeight="550" prefWidth="600.0">
+            <children>
+                <VBox alignment="CENTER" fx:id="rowContainer">
+                   <children>
+                   </children>
+                </VBox>
+            </children>
+            </StackPane>
+        </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

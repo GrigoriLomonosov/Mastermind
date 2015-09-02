@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import mastermind.controllers.*?>
-<?import mastermind.*?>
 
-<fx:root fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <fx:define>
-        <Model fx:id="model"/>
-    </fx:define>
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <top>
       <ToolBar prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <items>
-          <Button fx:id="newGameBtn" mnemonicParsing="false" onAction="#startNewGame" text="%newGameBtn" />
-            <Label fx:id="numberOfColorsLabel" text="%numberOfColorsLabel" />
+          <Button fx:id="newGameBtn" mnemonicParsing="false" onAction="#startNewGame" text="\%newGameBtn" />
+            <Label fx:id="numberOfColorsLabel" text="\%numberOfColorsLabel" />
             <ChoiceBox fx:id="colors" prefWidth="50.0" />
-            <Label fx:id="codeLengthLabel" text="%codeLengthLabel" />
+            <Label fx:id="codeLengthLabel" text="\%codeLengthLabel" />
             <ChoiceBox fx:id="codeLength" prefWidth="50.0" />
         </items>
       </ToolBar>
@@ -27,7 +23,7 @@
     <center>
         <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" BorderPane.alignment="CENTER">    
         <content>
-            <StackPane prefHeight="500.0" prefWidth="580.0">
+            <StackPane prefHeight="500.0" prefWidth="590.0">
             <children>
                 <VBox fx:id="rowContainer" alignment="CENTER">
                    <children>
@@ -39,10 +35,11 @@
         </ScrollPane>
     </center>
    <bottom>
-      <HBox fx:id="solutionContainer" alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-
+            <Label fx:id="solutionLabel" alignment="CENTER" text="\%solutionLabel" />
+            <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </HBox>
    </bottom>
-</fx:root>
+</BorderPane>

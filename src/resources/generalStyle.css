@@ -1,0 +1,16 @@
+/* 
+    Created on : 2-sep-2015, 12:03:50
+    Author     : Jeroen De Meyer
+*/
+
+#playButton{
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+}
+
+#playingFieldRow{
+    -fx-alignment: CENTER;
+    -fx-spacing: 10;
+}

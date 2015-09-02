@@ -16,6 +16,7 @@ public class Mastermind extends Application {
         Parent root = new PlayingField();
         
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("resources/generalStyle.css");
         
         stage.setTitle("Mastermind");
         //stage.getIcons().add(new Image("/resources/icon.png"));

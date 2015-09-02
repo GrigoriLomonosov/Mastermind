@@ -27,6 +27,7 @@ public class PlayingFieldRow {
     
     public HBox create(){
         HBox hb = new HBox();
+        hb.setId("playingFieldRow");
         HBox buttonBox = new HBox();
         HBox circleBox = new HBox();
         
@@ -47,13 +48,8 @@ public class PlayingFieldRow {
             model.addListener(cc);
             circleBox.getChildren().add(cc);
         }
+        
         hb.getChildren().add(circleBox);
-        setRowStyle(hb);
         return hb;
     } 
-    
-    public void setRowStyle(HBox hb){
-        hb.setAlignment(Pos.CENTER);
-        hb.setSpacing(8);
-    }
 }

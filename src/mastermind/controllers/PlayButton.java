@@ -23,11 +23,7 @@ public class PlayButton extends RowButton{
         super(model, tempAttempt, rowNumber);
         this.place = place;
         setOnAction(new PlayButtonHandler(model, tempAttempt,place));
-        setStyle(
-            "-fx-min-width: 30px; " +
-            "-fx-min-height: 30px; " +
-            "-fx-max-width: 30px; " +
-            "-fx-max-height: 30px;");
+        setId("playButton");
         setBackgroundColor();   
     }
     

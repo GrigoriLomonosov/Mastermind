@@ -30,7 +30,6 @@ public class CustomCircle extends Circle implements InvalidationListener{
     
     @Override
     public void invalidated(Observable o){
-        System.out.println("circle invalidated");
         if(rowNumber<model.getStep()){
             setStroke(Color.BLACK);            
         }

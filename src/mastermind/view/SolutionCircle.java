@@ -1,6 +1,5 @@
 package mastermind.view;
 
-import view.*;
 import javafx.scene.shape.Circle;
 import mastermind.ColorSelector;
 
